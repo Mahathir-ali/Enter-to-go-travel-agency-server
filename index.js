@@ -34,9 +34,10 @@ async function run() {
     });
 
     //GET booking
-    app.get("/booking", async (req, res) => {
-      const cursor = bookingCollection.find({});
-      const booking = await cursor.toArray();
+    app.get("/booking/:email", async (req, res) => {
+      const booking = await bookingCollection
+        .find({ email: req.params.email })
+        .toArray();
       res.send(booking);
     });
     //POST addBooking
