@@ -41,10 +41,19 @@ async function run() {
         .toArray();
       res.json(result);
     });
+
     //POST addBooking
     app.post("/addBooking", async (req, res) => {
       const booking = req.body;
       const result = await bookingCollection.insertOne(booking).toArray();
+      res.send(result);
+    });
+
+    //delete
+    app.delete("/booking/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: id };
+      const result = await bookingCollection.deleteOne(query);
       res.send(result);
     });
   } finally {
