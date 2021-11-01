@@ -33,6 +33,11 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/users", async (req, res) => {
+      const cursor = bookingCollection.find({});
+      const result = await cursor.toArray();
+      res.send(result);
+    });
     //GET booking
     app.get("/booking/:email", async (req, res) => {
       // console.log(req.params.email);
